@@ -1,0 +1,3 @@
+virtualenv venv
+source venv/bin/activate
+jupyter labextension install jupyterlab_robotmode

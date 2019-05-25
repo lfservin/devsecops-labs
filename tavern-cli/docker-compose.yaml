@@ -1,0 +1,34 @@
+version: "3"
+services:  
+  mongo_db:
+    image: we45/cut-the-funds-mongodb:latest
+    expose:
+    - "27017"
+    ports:
+    - "27017:27017"
+  mysql_db:
+    image: we45/cut-the-funds-mysql:latest
+    environment:
+    - MYSQL_DATABASE=expenses
+    - MYSQL_ROOT_PASSWORD=hegemony86
+    - MYSQL_USER=root
+    expose:
+    - "3306"
+    ports:
+    - "3306:3306"  
+  ctf_nodejs:
+    image: we45/cut-the-funds-nodejs:latest
+    environment:
+      - MONGO_IP=mongo_db
+      - MYSQL_IP=mysql_db
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=hegemony86
+      - MYSQL_DATABASE=expenses
+    expose:
+      - "3000"
+    ports:
+      - "3000:3000"
+    command: sh -c "./wait-for mongo_db:27017 -- pm2 start --no-daemon ./bin/www"
+    depends_on:
+      - mongo_db
+      - mysql_db

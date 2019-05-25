@@ -1,0 +1,191 @@
+---
+test_name: Login as manager
+
+includes:
+  - !include server.yaml
+
+stages:
+  - name: Login to api
+    request:
+      url: "{url}/users/login"
+      method: POST
+      json: 
+        email: "andy.roberts@widget.co"
+        password: "spiderman"
+    response:
+      status_code: 200
+      save:
+        body:
+          jwt_token: token
+
+---
+test_name: Get Projects
+
+includes:
+  - !include server.yaml
+
+stages:
+  - name: Login to api
+    request:
+      url: "{url}/users/login"
+      method: POST
+      json: 
+        email: "andy.roberts@widget.co"
+        password: "spiderman"
+    response:
+      status_code: 200
+      save:
+        body:
+          jwt_token: token
+  - name: Get Projects
+    request:
+      url: "{url}/projects/list_projects"
+      method: GET
+      headers:
+        Authorization: "{jwt_token}"
+    response:
+      status_code: 200
+
+
+---
+test_name: Create project
+
+includes:
+  - !include server.yaml
+
+stages:
+  - name: Login to api
+    request:
+      url: "{url}/users/login"
+      method: POST
+      json: 
+        email: "andy.roberts@widget.co"
+        password: "spiderman"
+    response:
+      status_code: 200
+      save:
+        body:
+          jwt_token: token      
+  - name: Create project
+    request:
+      url: "{url}/projects/create_project"
+      method: POST
+      headers:
+        Authorization: "{jwt_token}"
+      json: 
+        projectName: "Test Project"
+        limit: "1000"
+    response:
+      status_code: 201 
+
+---
+test_name: Get My Expenses
+
+includes:
+  - !include server.yaml
+
+stages:
+  - name: Login to api
+    request:
+      url: "{url}/users/login"
+      method: POST
+      json: 
+        email: "andy.roberts@widget.co"
+        password: "spiderman"
+    response:
+      status_code: 200
+      save:
+        body:
+          jwt_token: token          
+  - name: Get My Expenses
+    request:
+      url: "{url}/expenses/get_my_expenses"
+      method: GET
+      headers:
+        Authorization: "{jwt_token}"
+    response:
+      status_code: 403
+
+---
+test_name: Get cards
+
+includes:
+  - !include server.yaml
+
+stages:
+  - name: Login to api
+    request:
+      url: "{url}/users/login"
+      method: POST
+      json: 
+        email: "andy.roberts@widget.co"
+        password: "spiderman"
+    response:
+      status_code: 200
+      save:
+        body:
+          jwt_token: token      
+  - name: Get cards
+    request:
+      url: "{url}/users/get_cards"
+      method: GET
+      headers:
+        Authorization: "{jwt_token}"
+    response:
+      status_code: 403
+
+---
+test_name: Get Expenses dashboard
+
+includes:
+  - !include server.yaml
+
+stages:
+  - name: Login to api
+    request:
+      url: "{url}/users/login"
+      method: POST
+      json: 
+        email: "andy.roberts@widget.co"
+        password: "spiderman"
+    response:
+      status_code: 200
+      save:
+        body:
+          jwt_token: token      
+  - name: Get Expenses dashboard
+    request:
+      url: "{url}/expenses/dash/"
+      method: GET
+      headers:
+        Authorization: "{jwt_token}"
+    response:
+      status_code: 200
+
+---
+test_name: Get user profile
+
+includes:
+  - !include server.yaml
+
+stages:
+  - name: Login to api
+    request:
+      url: "{url}/users/login"
+      method: POST
+      json: 
+        email: "andy.roberts@widget.co"
+        password: "spiderman"
+    response:
+      status_code: 200
+      save:
+        body:
+          jwt_token: token      
+  - name: Get user profile
+    request:
+      url: "{url}/users/get_profile"
+      method: GET
+      headers:
+        Authorization: "{jwt_token}"
+    response:
+      status_code: 200

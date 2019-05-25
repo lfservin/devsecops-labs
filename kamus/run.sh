@@ -1,0 +1,3 @@
+kubectl run -it --rm --restart=Never kamus-cli --image=soluto/kamus-cli -- encrypt --secret user_db --service-account kamus --namespace default --kamus-url http://kamus-encryptor --allow-insecure-url
+kubectl run -it --rm --restart=Never kamus-cli --image=soluto/kamus-cli -- encrypt --secret Str0ngP@55w0rd --service-account kamus --namespace default --kamus-url http://kamus-encryptor --allow-insecure-url
+kubectl apply -f mysql.yaml

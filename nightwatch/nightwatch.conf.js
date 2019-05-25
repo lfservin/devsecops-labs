@@ -1,0 +1,100 @@
+const seleniumServer = require("selenium-server");
+// const chromedriver = require("chromedriver");
+
+// const SELENIUM_CONFIGURATION = {
+//     start_process: true,
+//     server_path: seleniumServer.path,
+//     host: '127.0.0.1',
+//     port: 4444,
+//     cli_args : {
+//         "webdriver.chrome.driver" : chromedriver.path
+//     },
+// };
+
+
+// const CHROME_CONFIGURATION = {
+//     browserName: 'chrome',
+//     javascriptEnabled: true,
+//     acceptSslCerts: true,
+//     chromeOptions: {
+//         args: [
+//             '--proxy-server=http://127.0.0.1:8090',
+//             '--no-sandbox'
+//         ]
+//     }
+// };
+
+// const DEFAULT_CONFIGURATION = {
+//     launch_url: 'http://localhost:9000',
+//     selenium_port: 4444,
+//     selenium_host: 'localhost',
+//     desiredCapabilities: CHROME_CONFIGURATION,
+//     globals: {
+//         asyncHookTimeout: 50000
+//     }
+// };
+
+const geckodriver = require('geckodriver');
+
+const SELENIUM_CONFIGURATION = {    
+    start_process: true,
+    server_path: seleniumServer.path,
+    host: '127.0.0.1',
+    port: 4444
+};
+
+const FIREFOX_CONFIGURATION = {
+    webdriver: {
+        server_path: geckodriver.path,        
+    },
+    browserName: 'firefox',
+    javascriptEnabled: true,
+	acceptSslCerts: true,
+    marionette: true,
+    // proxy: {
+    //     host:'127.0.0.1',
+    //     port:8090,
+    //     protocol: 'http',
+    //   },
+};
+
+const DEFAULT_CONFIGURATION = {
+    launch_url: 'http://139.59.88.146',
+    selenium_port: 4444,
+    selenium_host: 'localhost',
+    desiredCapabilities: FIREFOX_CONFIGURATION,
+    proxy: {
+        host:'127.0.0.1',
+        port:8001,
+        protocol: 'http',
+      },
+    // proxy:{
+	// 	"httpProxy": "127.0.0.1:8090",
+	// 	"protocol": "http"
+	// },
+    globals: {
+        asyncHookTimeout: 50000
+    }
+};
+
+
+const ENVIRONMENTS = {
+    default: DEFAULT_CONFIGURATION
+};
+
+//These are ZAP Specific Settings
+const OTHER_SETTINGS = {
+    zap_jrpc_server:  "http://localhost:4000/jsonrpc",
+    zap_report_path: "report.json",
+    zap_report_format: "json",
+    test_report_title: "ZAP Test for weCare Application",
+    test_report_author: "Abhay Bhargav",
+    zap_policy_name: "Light"
+};
+
+module.exports = {
+    src_folders: ['tests'],
+    selenium: SELENIUM_CONFIGURATION,
+    test_settings: ENVIRONMENTS,
+    // other_settings: OTHER_SETTINGS
+};

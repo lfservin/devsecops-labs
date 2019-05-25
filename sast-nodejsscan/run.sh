@@ -1,0 +1,1 @@
+nodejsscan -d $pwd/Cut-The-Funds-NodeJS/ -o nodejscan-report

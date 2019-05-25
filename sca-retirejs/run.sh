@@ -1,0 +1,1 @@
+retire --path $PWD --outputformat json --outputpath $PWD/retirejs-report.json

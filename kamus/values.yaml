@@ -1,0 +1,5 @@
+replicaCount: 1
+service:
+  type: NodePort
+autoscale:
+  minReplicas: 1

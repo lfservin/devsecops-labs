@@ -1,0 +1,4 @@
+RESTinstance==1.0.0b35
+RoboZap==1.2
+RoboNodeJSScan
+RoboNpmAudit
