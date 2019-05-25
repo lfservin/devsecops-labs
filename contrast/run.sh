@@ -1,0 +1,1 @@
+java -javaagent:contrast.jar -jar webgoat-container-7.1-exec.jar -httpPort 6080
